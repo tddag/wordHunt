@@ -10,6 +10,18 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var instructions: UILabel!
+    
+    @IBAction func iShow(_ sender: UIButton) {
+        if self.instructions.isHidden == true{
+            self.instructions.isHidden = false
+        }
+        else if self.instructions.isHidden == false{
+            self.instructions.isHidden = true
+        }
+        
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     var users: [String] = ["Hao", "Tam", "Quan", "Chris", "Player", "Test"]
     var scores: [String] = ["4:00", "4:12", "4:56", "5:15", "7:27", "10:00"]

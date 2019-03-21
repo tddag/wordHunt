@@ -53,14 +53,26 @@ class Puzzle3ViewController: UIViewController {
     }
     
 
-    /*
+    @IBAction func checkBtn(_ sender: Any) {
+        timer.invalidate()
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "resultShow" {
+            let dc = segue.destination as! ResultsViewController
+            if let lv1 = level1Outcome {
+                dc.level1Outcome = lv1
+            }
+            if let lv2 = level2Outcome {
+                dc.level2Outcome = lv2
+            }
+            dc.level3Outcome = String(duration)
+            
+        }
     }
-    */
+    
 
 }

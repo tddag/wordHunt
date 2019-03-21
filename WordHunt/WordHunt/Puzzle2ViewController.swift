@@ -47,6 +47,9 @@ class Puzzle2ViewController: UIViewController {
     }
     
 
+    @IBAction func checkBtn(_ sender: Any) {
+        timer.invalidate()
+    }
     
     // MARK: - Navigation
 

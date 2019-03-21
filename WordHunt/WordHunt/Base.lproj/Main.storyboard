@@ -1064,10 +1064,10 @@
             </objects>
             <point key="canvasLocation" x="168.80000000000001" y="343.17841079460271"/>
         </scene>
-        <!--View Controller-->
+        <!--Results View Controller-->
         <scene sceneID="ShY-Zh-t7n">
             <objects>
-                <viewController id="YNz-Mk-UVa" customClass="ViewController" customModule="WordHunt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YNz-Mk-UVa" customClass="ResultsViewController" customModule="WordHunt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uzx-A5-mtY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1154,6 +1154,12 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="5Pv-8b-vjr"/>
                     </view>
+                    <connections>
+                        <outlet property="lv1Lbl" destination="q8c-PY-ZKF" id="tOb-Mu-Fh7"/>
+                        <outlet property="lv2Lbl" destination="yfE-O9-fBL" id="og8-VW-eqy"/>
+                        <outlet property="lv3Lbl" destination="soQ-7Y-Lry" id="PD9-gy-Suu"/>
+                        <outlet property="totalTimeLbl" destination="ks6-Dx-Hef" id="NQU-eW-2zg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7T3-Ia-7LB" sceneMemberID="firstResponder"/>
             </objects>
@@ -1280,6 +1286,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="checkBtn:" destination="vPA-tW-laN" eventType="touchUpInside" id="Rkn-gB-yEZ"/>
                                     <segue destination="AFs-4R-r9A" kind="show" identifier="level3Show" id="O9m-0G-dbo"/>
                                 </connections>
                             </button>
@@ -2259,7 +2266,8 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="YNz-Mk-UVa" kind="show" id="fgd-Bt-oSZ"/>
+                                    <action selector="checkBtn:" destination="AFs-4R-r9A" eventType="touchUpInside" id="2Qs-P7-0GX"/>
+                                    <segue destination="YNz-Mk-UVa" kind="show" identifier="resultShow" id="fgd-Bt-oSZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uu0-DM-mKA">
@@ -3113,7 +3121,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="g1G-v7-2ks"/>
-        <segue reference="Alx-Xc-LrW"/>
+        <segue reference="fgd-Bt-oSZ"/>
+        <segue reference="uAT-c1-Q71"/>
+        <segue reference="qJh-sw-fY5"/>
     </inferredMetricsTieBreakers>
 </document>

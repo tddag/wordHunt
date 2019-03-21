@@ -19,12 +19,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         else if self.instructions.isHidden == false{
             self.instructions.isHidden = true
         }
-        
     }
     
+    
+    @IBOutlet weak var oneTimer: UILabel!
+    @IBOutlet weak var twoTimer: UILabel!
+    @IBOutlet weak var threeTimer: UILabel!
+    
     @IBOutlet weak var tableView: UITableView!
-    var users: [String] = ["Hao", "Tam", "Quan", "Chris", "Player", "Test"]
-    var scores: [String] = ["4:00", "4:12", "4:56", "5:15", "7:27", "10:00"]
+    var users: [String] = ["Hao", "Tam", "Quan", "Chris"]
+    var scores: [String] = ["5:00", "6:00", "7:00", "8:00"]
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (users.count);
@@ -38,6 +42,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        oneTimer.text = "One"
+//        twoTimer.text = "Two"
+//        threeTimer.text = "Three"
     }
     
     override func didReceiveMemoryWarning() {

@@ -14,6 +14,9 @@
 		2ED1F5F5223AE07C006AFDF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED1F5F3223AE07C006AFDF8 /* LaunchScreen.storyboard */; };
 		2ED1F600223AE07C006AFDF8 /* WordHuntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1F5FF223AE07C006AFDF8 /* WordHuntTests.swift */; };
 		2ED1F60B223AE07C006AFDF8 /* WordHuntUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1F60A223AE07C006AFDF8 /* WordHuntUITests.swift */; };
+		39A40B0F2244245A00FCDF7A /* Puzzle1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A40B0E2244245A00FCDF7A /* Puzzle1ViewController.swift */; };
+		39A40B1122442AC900FCDF7A /* Puzzle2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A40B1022442AC900FCDF7A /* Puzzle2ViewController.swift */; };
+		39A40B1322442D8400FCDF7A /* Puzzle3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A40B1222442D8400FCDF7A /* Puzzle3ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		2ED1F606223AE07C006AFDF8 /* WordHuntUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordHuntUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ED1F60A223AE07C006AFDF8 /* WordHuntUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordHuntUITests.swift; sourceTree = "<group>"; };
 		2ED1F60C223AE07C006AFDF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39A40B0E2244245A00FCDF7A /* Puzzle1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle1ViewController.swift; sourceTree = "<group>"; };
+		39A40B1022442AC900FCDF7A /* Puzzle2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle2ViewController.swift; sourceTree = "<group>"; };
+		39A40B1222442D8400FCDF7A /* Puzzle3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle3ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +106,9 @@
 				2ED1F5EA223AE07B006AFDF8 /* AppDelegate.swift */,
 				2ED1F5EC223AE07B006AFDF8 /* ViewController.swift */,
 				2ED1F5EE223AE07B006AFDF8 /* Main.storyboard */,
+				39A40B1222442D8400FCDF7A /* Puzzle3ViewController.swift */,
+				39A40B1022442AC900FCDF7A /* Puzzle2ViewController.swift */,
+				39A40B0E2244245A00FCDF7A /* Puzzle1ViewController.swift */,
 				2ED1F5F1223AE07C006AFDF8 /* Assets.xcassets */,
 				2ED1F5F3223AE07C006AFDF8 /* LaunchScreen.storyboard */,
 				2ED1F5F6223AE07C006AFDF8 /* Info.plist */,
@@ -257,6 +266,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ED1F5ED223AE07B006AFDF8 /* ViewController.swift in Sources */,
+				39A40B1322442D8400FCDF7A /* Puzzle3ViewController.swift in Sources */,
+				39A40B1122442AC900FCDF7A /* Puzzle2ViewController.swift in Sources */,
+				39A40B0F2244245A00FCDF7A /* Puzzle1ViewController.swift in Sources */,
 				2ED1F5EB223AE07B006AFDF8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

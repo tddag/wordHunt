@@ -131,6 +131,9 @@ class Puzzle1ViewController: UIViewController {
     @IBOutlet weak var A98: UIButton!
     @IBOutlet weak var A99: UIButton!
     
+    // Word_Pressed
+    @IBOutlet weak var word_Output: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Toggle timer to true
@@ -176,7 +179,7 @@ class Puzzle1ViewController: UIViewController {
                         if condition_flag == false {
                             done_flag = true
                             for char in word {
-                                print(row, col, word)
+//                                print(row, col, word)
                                 arr[row][col]?.setTitle(String(char), for: .normal)
                                 row += 1
                             }
@@ -190,7 +193,7 @@ class Puzzle1ViewController: UIViewController {
                         if condition_flag == false {
                             done_flag = true
                             for char in word {
-                                print(row, col, word)
+//                                print(row, col, word)
                                 arr[row][col]?.setTitle(String(char), for: .normal)
                                 col += 1
                             }
@@ -204,7 +207,7 @@ class Puzzle1ViewController: UIViewController {
                         if condition_flag == false {
                             done_flag = true
                             for char in word {
-                                print(row, col, word)
+//                                print(row, col, word)
                                 arr[row][col]?.setTitle(String(char), for: .normal)
                                 col -= 1
                                 row += 1
@@ -219,7 +222,7 @@ class Puzzle1ViewController: UIViewController {
                         if condition_flag == false {
                             done_flag = true
                             for char in word {
-                                print(row, col, word)
+//                                print(row, col, word)
                                 arr[row][col]?.setTitle(String(char), for: .normal)
                                 col += 1
                                 row += 1
@@ -240,6 +243,23 @@ class Puzzle1ViewController: UIViewController {
         }
         
     }
+    
+    
+    @IBAction func letterButtonPressed(_ sender: UIButton) {
+        sender.isSelected = true
+        word_Output.text = word_Output.text! + String(sender.currentTitle!)
+        
+        
+        
+        
+        
+        
+    }
+    
+
+    
+    
+    
     
     func checkCondition(_ arr: [[UIButton?]], _ direction: String, _ row: Int, _ col: Int, _ word: String) -> Bool {
         switch direction {
@@ -275,7 +295,6 @@ class Puzzle1ViewController: UIViewController {
             case "rightleft_diagonal":
                 // check if not have enough space for word
                 if ((col < word.count - 1) && (row > 10 - word.count))  {
-                    print("here")
                     return true
                 } else if ((col >= word.count - 1) && (row <= 10 - word.count)) {
                     // check if word is overlapped
@@ -283,7 +302,7 @@ class Puzzle1ViewController: UIViewController {
                     var temp_col = col
                     for _ in 0..<word.count {
                         if arr[temp_row][temp_col]?.currentTitle != nil {
-                            print("TEST", word, temp_row, temp_col)
+//                            print("TEST", word, temp_row, temp_col)
                             return true
                         }
                         temp_row += 1
@@ -295,7 +314,6 @@ class Puzzle1ViewController: UIViewController {
             case "leftright_diagonal":
                 // check if not have enough space for word
                 if ((col > (10 - word.count)) && (row > 10 - word.count))  {
-                    print("here")
                     return true
                 } else if ((col <= (10 - word.count)) && (row <= 10 - word.count)) {
                     // check if word is overlapped
@@ -303,7 +321,7 @@ class Puzzle1ViewController: UIViewController {
                     var temp_col = col
                     for _ in 0..<word.count {
                         if arr[temp_row][temp_col]?.currentTitle != nil {
-                            print("TEST", word, temp_row, temp_col)
+//                            print("TEST", word, temp_row, temp_col)
                             return true
                         }
                         temp_row += 1
@@ -317,6 +335,9 @@ class Puzzle1ViewController: UIViewController {
         }
         return true
     }
+    
+    
+    
     
     func toggleTimer(on: Bool) {
         if on {

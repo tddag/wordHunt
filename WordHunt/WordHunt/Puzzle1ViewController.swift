@@ -131,14 +131,43 @@ class Puzzle1ViewController: UIViewController {
     @IBOutlet weak var A98: UIButton!
     @IBOutlet weak var A99: UIButton!
     
+    // Message Label
+    @IBOutlet weak var message: UILabel!
+    
+    // Word Labels
+    @IBOutlet weak var word1: UILabel!
+    @IBOutlet weak var word2: UILabel!
+    @IBOutlet weak var word3: UILabel!
+    @IBOutlet weak var word4: UILabel!
+    @IBOutlet weak var word5: UILabel!
+    @IBOutlet weak var word6: UILabel!
+    @IBOutlet weak var word7: UILabel!
+    @IBOutlet weak var word8: UILabel!
+    @IBOutlet weak var word9: UILabel!
+    
     // Word_Pressed
     @IBOutlet weak var word_Output: UILabel!
+    
+    // Dictionary of words
+    let word_bank: Array = ["THOMPSON", "VILLAGE", "INSIDE", "GOOD", "AIR", "BREAD", "TAM", "TWO", "CITY", "LAPTOP"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Toggle timer to true
         isTimerOn.toggle()
         toggleTimer(on: isTimerOn)
+        
+        // Set Word Labels
+        word1.text = word_bank[0]
+        word2.text = word_bank[1]
+        word3.text = word_bank[2]
+        word4.text = word_bank[3]
+        word5.text = word_bank[4]
+        word6.text = word_bank[5]
+        word7.text = word_bank[6]
+        word8.text = word_bank[7]
+        word9.text = word_bank[8]
+        
         // Array of referenced Buttons
         var arr: Array = [ [A00, A01, A02, A03, A04, A05, A06, A07, A08, A09],
                            [A10, A11, A12, A13, A14, A15, A16, A17, A18, A19],
@@ -151,8 +180,6 @@ class Puzzle1ViewController: UIViewController {
                            [A80, A81, A82, A83, A84, A85, A86, A87, A88, A89],
                            [A90, A91, A92, A93, A94, A95, A96, A97, A98, A99],
                         ]
-        // Dictionary of words
-        let word_bank: Array = ["THOMPSON", "VILLAGE", "INSIDE", "GOOD", "AIR", "BREAD", "TAM", "TWO", "CITY", "LAPTOP"]
         let word_directions: Array = ["vertical","horizontal", "rightleft_diagonal", "leftright_diagonal" ]
         for word in word_bank {
 //            print(word)
@@ -244,23 +271,41 @@ class Puzzle1ViewController: UIViewController {
         
     }
     
-    
+    // Display letters when each letter is pressed
     @IBAction func letterButtonPressed(_ sender: UIButton) {
         sender.isSelected = true
         word_Output.text = word_Output.text! + String(sender.currentTitle!)
-        
-        
-        
-        
-        
-        
+    }
+    
+    // Check Word
+    @IBAction func checkWord(_ sender: Any) {
+        if word_bank.contains(word_Output.text!) {
+            message.text = "CORRECT!!!"
+            message.backgroundColor = UIColor.green
+            messageApper(message)
+        } else {
+            message.text = "TRY AGAIN!!!"
+            message.backgroundColor = UIColor.yellow
+            messageApper(message)
+        }
+    }
+    
+    func messageApper(_ message: UILabel) {
+        message.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            message.isHidden = true
+        }
+    }
+    
+    @IBAction func resetWord(_ sender: Any) {
+        word_Output.text = ""
     }
     
 
     
     
     
-    
+    // Check condition to put word into cells
     func checkCondition(_ arr: [[UIButton?]], _ direction: String, _ row: Int, _ col: Int, _ word: String) -> Bool {
         switch direction {
             case "vertical":

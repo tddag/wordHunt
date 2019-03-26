@@ -153,6 +153,12 @@ class Puzzle1ViewController: UIViewController {
     
     var word_count: Int = 0
     
+    // Congratulation message
+    @IBOutlet weak var congratulationMessage: UILabel!
+    
+    // Next Level Button
+    @IBOutlet weak var nextLevelBtn: UIButton!
+    
     // Alphabet
     let alphabet: Array = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
@@ -332,6 +338,10 @@ class Puzzle1ViewController: UIViewController {
         } else {
             message.text = "TRY AGAIN!!!"
             message.backgroundColor = UIColor.yellow
+        }
+        if word_count == 9 {
+            congratulationMessage.isHidden = false
+            nextLevelBtn.isHidden = false
         }
         messageApper(message)
         word_Output.text = ""

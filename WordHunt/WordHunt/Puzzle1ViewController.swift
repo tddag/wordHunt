@@ -149,40 +149,25 @@ class Puzzle1ViewController: UIViewController {
     @IBOutlet weak var word_Output: UILabel!
     
     // Dictionary of words
-    let word_bank: Array = ["THOMPSON", "VILLAGE", "INSIDE", "GOOD", "AIR", "BREAD", "TAM", "TWO", "CITY", "LAPTOP"]
+    let word_bank: Array = ["THOMPSON", "VILLAGE", "INSIDE", "GOOD", "AIR", "BREAD", "DOMAIN", "CITY", "LAPTOP"]
+    
+    // array of word_directions
+    let word_directions: Array = ["vertical","horizontal", "rightleft_diagonal", "leftright_diagonal" ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Toggle timer to true
         isTimerOn.toggle()
         toggleTimer(on: isTimerOn)
-        
-        // Set Word Labels
-        word1.text = word_bank[0]
-        word2.text = word_bank[1]
-        word3.text = word_bank[2]
-        word4.text = word_bank[3]
-        word5.text = word_bank[4]
-        word6.text = word_bank[5]
-        word7.text = word_bank[6]
-        word8.text = word_bank[7]
-        word9.text = word_bank[8]
-        
+        setWordsToLabels()
+        randomlyInsertWord()
+    }
+    
+    // Randomly inserting word into buttons
+    func randomlyInsertWord() {
         // Array of referenced Buttons
-        var arr: Array = [ [A00, A01, A02, A03, A04, A05, A06, A07, A08, A09],
-                           [A10, A11, A12, A13, A14, A15, A16, A17, A18, A19],
-                           [A20, A21, A22, A23, A24, A25, A26, A27, A28, A29],
-                           [A30, A31, A32, A33, A34, A35, A36, A37, A38, A39],
-                           [A40, A41, A42, A43, A44, A45, A46, A47, A48, A49],
-                           [A50, A51, A52, A53, A54, A55, A56, A57, A58, A59],
-                           [A60, A61, A62, A63, A64, A65, A66, A67, A68, A69],
-                           [A70, A71, A72, A73, A74, A75, A76, A77, A78, A79],
-                           [A80, A81, A82, A83, A84, A85, A86, A87, A88, A89],
-                           [A90, A91, A92, A93, A94, A95, A96, A97, A98, A99],
-                        ]
-        let word_directions: Array = ["vertical","horizontal", "rightleft_diagonal", "leftright_diagonal" ]
+        var arr: [[UIButton]] = loadButtonArray()
         for word in word_bank {
-//            print(word)
             for _ in 0..<1000000000000000 {
                 // generate random row index
                 var row:Int = Int.random(in: 0...9)
@@ -198,67 +183,67 @@ class Puzzle1ViewController: UIViewController {
                 var done_flag: Bool = false;
                 // different cases for specific word_direction
                 switch word_direction {
-                    // if word goes vertically
-                    case "vertical":
-                        condition_flag = checkCondition(arr, "vertical", row, col, word)
-                        done_flag = !condition_flag
-                            // all conditions match, assign letters to verified buttons
-                        if condition_flag == false {
-                            done_flag = true
-                            for char in word {
-//                                print(row, col, word)
-                                arr[row][col]?.setTitle(String(char), for: .normal)
-                                row += 1
-                            }
+                // if word goes vertically
+                case "vertical":
+                    condition_flag = checkCondition(arr, "vertical", row, col, word)
+                    done_flag = !condition_flag
+                    // all conditions match, assign letters to verified buttons
+                    if condition_flag == false {
+                        done_flag = true
+                        for char in word {
+                            //                                print(row, col, word)
+                            arr[row][col].setTitle(String(char), for: .normal)
+                            row += 1
                         }
-                        break
-                    // if word goes horizontally
-                    case "horizontal":
-                        condition_flag = checkCondition(arr, "horizontal", row, col, word)
-                        done_flag = !condition_flag
-                        // all conditions match, assign letters to verified buttons
-                        if condition_flag == false {
-                            done_flag = true
-                            for char in word {
-//                                print(row, col, word)
-                                arr[row][col]?.setTitle(String(char), for: .normal)
-                                col += 1
-                            }
+                    }
+                    break
+                // if word goes horizontally
+                case "horizontal":
+                    condition_flag = checkCondition(arr, "horizontal", row, col, word)
+                    done_flag = !condition_flag
+                    // all conditions match, assign letters to verified buttons
+                    if condition_flag == false {
+                        done_flag = true
+                        for char in word {
+                            //                                print(row, col, word)
+                            arr[row][col].setTitle(String(char), for: .normal)
+                            col += 1
                         }
-                        break
-                    // if word goes rightleft_diagonal
-                    case "rightleft_diagonal":
-                        condition_flag = checkCondition(arr, "rightleft_diagonal", row, col, word)
-                        done_flag = !condition_flag
-                        // all conditions match, assign letters to verified buttons
-                        if condition_flag == false {
-                            done_flag = true
-                            for char in word {
-//                                print(row, col, word)
-                                arr[row][col]?.setTitle(String(char), for: .normal)
-                                col -= 1
-                                row += 1
-                            }
+                    }
+                    break
+                // if word goes rightleft_diagonal
+                case "rightleft_diagonal":
+                    condition_flag = checkCondition(arr, "rightleft_diagonal", row, col, word)
+                    done_flag = !condition_flag
+                    // all conditions match, assign letters to verified buttons
+                    if condition_flag == false {
+                        done_flag = true
+                        for char in word {
+                            //                                print(row, col, word)
+                            arr[row][col].setTitle(String(char), for: .normal)
+                            col -= 1
+                            row += 1
                         }
-                        break
-                    // if word goes leftright_diagonal
-                    case "leftright_diagonal":
-                        condition_flag = checkCondition(arr, "leftright_diagonal", row, col, word)
-                        done_flag = !condition_flag
-                        // all conditions match, assign letters to verified buttons
-                        if condition_flag == false {
-                            done_flag = true
-                            for char in word {
-//                                print(row, col, word)
-                                arr[row][col]?.setTitle(String(char), for: .normal)
-                                col += 1
-                                row += 1
-                            }
+                    }
+                    break
+                // if word goes leftright_diagonal
+                case "leftright_diagonal":
+                    condition_flag = checkCondition(arr, "leftright_diagonal", row, col, word)
+                    done_flag = !condition_flag
+                    // all conditions match, assign letters to verified buttons
+                    if condition_flag == false {
+                        done_flag = true
+                        for char in word {
+                            //                                print(row, col, word)
+                            arr[row][col].setTitle(String(char), for: .normal)
+                            col += 1
+                            row += 1
                         }
-                        break
+                    }
+                    break
                     
-                    default:
-                        break
+                default:
+                    break
                 }
                 if condition_flag {
                     continue
@@ -268,7 +253,39 @@ class Puzzle1ViewController: UIViewController {
                 }
             }
         }
-        
+    }
+    
+    // load buttons array
+    func loadButtonArray() -> [[UIButton]] {
+        return [[A00, A01, A02, A03, A04, A05, A06, A07, A08, A09],
+                [A10, A11, A12, A13, A14, A15, A16, A17, A18, A19],
+                [A20, A21, A22, A23, A24, A25, A26, A27, A28, A29],
+                [A30, A31, A32, A33, A34, A35, A36, A37, A38, A39],
+                [A40, A41, A42, A43, A44, A45, A46, A47, A48, A49],
+                [A50, A51, A52, A53, A54, A55, A56, A57, A58, A59],
+                [A60, A61, A62, A63, A64, A65, A66, A67, A68, A69],
+                [A70, A71, A72, A73, A74, A75, A76, A77, A78, A79],
+                [A80, A81, A82, A83, A84, A85, A86, A87, A88, A89],
+                [A90, A91, A92, A93, A94, A95, A96, A97, A98, A99],
+        ]
+    }
+    
+    // load output labels array
+    func loadOutputLabelArr() -> [UILabel] {
+        return [word1, word2, word3, word4, word5, word6, word7, word8, word9]
+    }
+    
+    // Set Words to Labels
+    func setWordsToLabels() {
+        word1.text = word_bank[0]
+        word2.text = word_bank[1]
+        word3.text = word_bank[2]
+        word4.text = word_bank[3]
+        word5.text = word_bank[4]
+        word6.text = word_bank[5]
+        word7.text = word_bank[6]
+        word8.text = word_bank[7]
+        word9.text = word_bank[8]
     }
     
     // Display letters when each letter is pressed
@@ -282,14 +299,22 @@ class Puzzle1ViewController: UIViewController {
         if word_bank.contains(word_Output.text!) {
             message.text = "CORRECT!!!"
             message.backgroundColor = UIColor.green
-            messageApper(message)
+            let outputLabels: [UILabel] = loadOutputLabelArr()
+            for label in outputLabels {
+                if label.text == word_Output.text {
+                    label.isHidden = false
+                }
+            }
         } else {
             message.text = "TRY AGAIN!!!"
             message.backgroundColor = UIColor.yellow
-            messageApper(message)
         }
+        messageApper(message)
+        word_Output.text = ""
+        resetSelectedButton()
     }
     
+    // Show message in 3 seconds
     func messageApper(_ message: UILabel) {
         message.isHidden = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -297,13 +322,21 @@ class Puzzle1ViewController: UIViewController {
         }
     }
     
+    // reset word and button being selected when RESET button is pressed
     @IBAction func resetWord(_ sender: Any) {
         word_Output.text = ""
+        resetSelectedButton()
     }
     
-
-    
-    
+    // Reset all buttons are being selected
+    func resetSelectedButton() {
+        let buttonArr: [[UIButton]] = loadButtonArray()
+        for a in 0...9 {
+            for b in 0...9 {
+                buttonArr[a][b].isSelected = false
+            }
+        }
+    }
     
     // Check condition to put word into cells
     func checkCondition(_ arr: [[UIButton?]], _ direction: String, _ row: Int, _ col: Int, _ word: String) -> Bool {
@@ -347,7 +380,6 @@ class Puzzle1ViewController: UIViewController {
                     var temp_col = col
                     for _ in 0..<word.count {
                         if arr[temp_row][temp_col]?.currentTitle != nil {
-//                            print("TEST", word, temp_row, temp_col)
                             return true
                         }
                         temp_row += 1
@@ -366,7 +398,6 @@ class Puzzle1ViewController: UIViewController {
                     var temp_col = col
                     for _ in 0..<word.count {
                         if arr[temp_row][temp_col]?.currentTitle != nil {
-//                            print("TEST", word, temp_row, temp_col)
                             return true
                         }
                         temp_row += 1
@@ -381,9 +412,7 @@ class Puzzle1ViewController: UIViewController {
         return true
     }
     
-    
-    
-    
+    // Toggle Timer
     func toggleTimer(on: Bool) {
         if on {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {[weak self] (_) in
@@ -397,14 +426,10 @@ class Puzzle1ViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func checkBtn(_ sender: Any) {
+    // Invalidate timer when press NEXT LEVEL
+    @IBAction func nextLevel(_ sender: Any) {
         timer.invalidate()
     }
-    
-    
-    
-
     
     // MARK: - Navigation
 

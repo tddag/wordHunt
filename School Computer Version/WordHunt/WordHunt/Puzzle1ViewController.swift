@@ -306,8 +306,23 @@ class Puzzle1ViewController: UIViewController {
     
     // Display letters when each letter is pressed
     @IBAction func letterButtonPressed(_ sender: UIButton) {
-        sender.isSelected = true
-        word_Output.text = word_Output.text! + String(sender.currentTitle!)
+        if sender.isSelected == false{
+            sender.isSelected = true
+            word_Output.text = word_Output.text! + String(sender.currentTitle!)
+        }
+        else if sender.isSelected == true{
+            sender.isSelected = false
+            var count = word_Output.text!.count
+            var removed = false
+            while (count > 0){
+                if (removed == false) {
+                    removed = true
+                }
+                else{
+                }
+                count = count - 1
+            }
+        }
     }
     
     // Fill empty buttons

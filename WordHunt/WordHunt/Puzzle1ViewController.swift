@@ -148,10 +148,13 @@ class Puzzle1ViewController: UIViewController {
     // Word_Pressed
     @IBOutlet weak var word_Output: UILabel!
     
-    // word_count
+    // word_count Label
     @IBOutlet weak var word_count_label: UILabel!
     
     var word_count: Int = 0
+    
+    // Alphabet
+    let alphabet: Array = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     // Dictionary of words
     let word_bank: Array = ["THOMPSON", "VILLAGE", "INSIDE", "GOOD", "AIR", "BREAD", "DOMAIN", "CITY", "LAPTOP"]
@@ -312,6 +315,7 @@ class Puzzle1ViewController: UIViewController {
             }
             word_count += 1
             word_count_label.text = "\(word_count)/9 Words"
+            refillCorrectedWord()
         } else {
             message.text = "TRY AGAIN!!!"
             message.backgroundColor = UIColor.yellow
@@ -430,6 +434,18 @@ class Puzzle1ViewController: UIViewController {
                 )
         } else {
             timer.invalidate()
+        }
+    }
+    
+    // Refill corrected word with random letters
+    func refillCorrectedWord () {
+        var buttonsArr: [[UIButton]] = loadButtonArray()
+        for a in 0...9 {
+            for b in 0...9 {
+                if buttonsArr[a][b].isSelected ==  true {
+                    buttonsArr[a][b].setTitle(alphabet.randomElement(), for: .normal)
+                }
+            }
         }
     }
     

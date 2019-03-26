@@ -169,6 +169,7 @@ class Puzzle1ViewController: UIViewController {
         toggleTimer(on: isTimerOn)
         setWordsToLabels()
         randomlyInsertWord()
+        fillEmptyButtons()
     }
     
     // Randomly inserting word into buttons
@@ -300,6 +301,18 @@ class Puzzle1ViewController: UIViewController {
     @IBAction func letterButtonPressed(_ sender: UIButton) {
         sender.isSelected = true
         word_Output.text = word_Output.text! + String(sender.currentTitle!)
+    }
+    
+    // Fill empty buttons
+    func fillEmptyButtons() {
+        let buttonsArr: [[UIButton]] = loadButtonArray()
+        for a in 0...9 {
+            for b in 0...9 {
+                if buttonsArr[a][b].currentTitle == nil {
+                    buttonsArr[a][b].setTitle(alphabet.randomElement(), for: .normal)
+                }
+            }
+        }
     }
     
     // Check Word

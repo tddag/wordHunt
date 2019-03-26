@@ -148,6 +148,11 @@ class Puzzle1ViewController: UIViewController {
     // Word_Pressed
     @IBOutlet weak var word_Output: UILabel!
     
+    // word_count
+    @IBOutlet weak var word_count_label: UILabel!
+    
+    var word_count: Int = 0
+    
     // Dictionary of words
     let word_bank: Array = ["THOMPSON", "VILLAGE", "INSIDE", "GOOD", "AIR", "BREAD", "DOMAIN", "CITY", "LAPTOP"]
     
@@ -305,6 +310,8 @@ class Puzzle1ViewController: UIViewController {
                     label.isHidden = false
                 }
             }
+            word_count += 1
+            word_count_label.text = "\(word_count)/9 Words"
         } else {
             message.text = "TRY AGAIN!!!"
             message.backgroundColor = UIColor.yellow

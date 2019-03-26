@@ -1463,6 +1463,7 @@
                         <outlet property="word7" destination="lLt-1u-URE" id="Pio-EI-F3X"/>
                         <outlet property="word8" destination="LHv-sh-COY" id="cE9-Kr-7i4"/>
                         <outlet property="word9" destination="ctp-Gg-6Uo" id="4aH-0r-KdY"/>
+                        <outlet property="word_count_label" destination="1Yz-D4-5Ip" id="CSJ-kK-v3F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AnG-ho-qV2" sceneMemberID="firstResponder"/>

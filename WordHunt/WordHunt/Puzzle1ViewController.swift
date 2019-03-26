@@ -323,7 +323,7 @@ class Puzzle1ViewController: UIViewController {
             let outputLabels: [UILabel] = loadOutputLabelArr()
             for label in outputLabels {
                 if label.text == word_Output.text {
-                    label.isHidden = false
+                    label.backgroundColor = UIColor.green
                 }
             }
             word_count += 1

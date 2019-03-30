@@ -175,7 +175,7 @@ class Puzzle1ViewController: UIViewController {
         toggleTimer(on: isTimerOn)
         setWordsToLabels()
         randomlyInsertWord()
-        fillEmptyButtons()
+//        fillEmptyButtons()
     }
     
     // Randomly inserting word into buttons

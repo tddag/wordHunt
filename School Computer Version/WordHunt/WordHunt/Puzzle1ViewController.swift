@@ -524,7 +524,7 @@ class Puzzle1ViewController: UIViewController {
                 }
             }
         }
-        // Uses selected buttons array and checks that each button is adjacent to the next one (horizontally or vertically), then puts the direction (horizontal or vertical) into an array
+        // Uses selected buttons array and checks that each button is adjacent to the next one (horizontally, vertically, rightleft-diagonally, leftright-diagonally), then puts the direction (horizontal, vertical, rightleft-diagonally, leftright-diagonally) into an array
         var direction: [String] = []
         for i in 1..<selectedButtons.count {
             if selectedButtons[i-1].prefix(1) == selectedButtons[i].prefix(1) &&
@@ -535,11 +535,19 @@ class Puzzle1ViewController: UIViewController {
                 Int(selectedButtons[i-1].prefix(1))! == Int(selectedButtons[i].prefix(1))! - 1 {
                 direction.append("H")
             }
+            else if Int(selectedButtons[i-1].prefix(1)) == Int(selectedButtons[i].prefix(1))! - 1 &&
+                Int(selectedButtons[i-1].suffix(1)) == Int(selectedButtons[i].suffix(1))! + 1 {
+                direction.append("RLD")
+            }
+            else if Int(selectedButtons[i-1].prefix(1)) == Int(selectedButtons[i].prefix(1))! - 1 &&
+                Int(selectedButtons[i-1].suffix(1)) == Int(selectedButtons[i].suffix(1))! - 1 {
+                direction.append("LRD")
+            }
             else {
                 return false
             }
         }
-        // Checks the direction array to make sure all shifts are only horizontal or only vertical.
+        // Checks the direction array to make sure all shifts are only horizontal, or only vertical, or only rightleft-diagonally, or only leftright-diagonally.
         for i in direction{
             if direction[0] != i {
                 return false

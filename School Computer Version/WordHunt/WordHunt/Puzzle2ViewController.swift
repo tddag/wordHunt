@@ -205,7 +205,7 @@ class Puzzle2ViewController: UIViewController {
         createWordBank(_wordNum: 12)
         setWordsToLabels()
         randomlyInsertWord()
-        fillEmptyButtons()
+//        fillEmptyButtons()
         
         if let lv1 = level1Outcome {
             Outcome1Lbl.text = lv1

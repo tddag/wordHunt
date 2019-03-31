@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SQLite3
 
 class ResultsViewController: UIViewController {
     
@@ -14,6 +15,7 @@ class ResultsViewController: UIViewController {
     var level2Outcome: String?
     var level3Outcome: String?
     var total:Int = 0
+    var db: OpaquePointer?
     
     @IBOutlet weak var lv1Lbl: UILabel!
     
@@ -23,8 +25,24 @@ class ResultsViewController: UIViewController {
     
     @IBOutlet weak var totalTimeLbl: UILabel!
     
+    @IBOutlet weak var nameTxt: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let file = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("database.db")
+        print(file)
+        if sqlite3_open(file.path, &db) != SQLITE_OK {
+            print("error opening database")
+        } else {
+            let create = "CREATE TABLE IF NOT EXISTS Players(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, score INTEGER)"
+            if sqlite3_exec(db, create, nil, nil, nil) != SQLITE_OK {
+                let err = String(cString: sqlite3_errmsg(db))
+                print("error creating db: \(err)")
+            }
+        }
+        
         if let lv1 = level1Outcome {
             lv1Lbl.text = "Level 1: \(lv1)"
             total += Int(lv1)!
@@ -43,6 +61,38 @@ class ResultsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func submitScore(_ sender: Any) {
+        
+        var name = nameTxt.text!
+        if name == "" {
+            name = "Anonymous"
+        }
+        let score = total
+        
+        let insert = "INSERT INTO Players(name, score) VALUES(?, ?)"
+        var stmt: OpaquePointer?
+        
+        if sqlite3_prepare(db, insert, -1, &stmt, nil) != SQLITE_OK {
+            let err = String(cString: sqlite3_errmsg(db))
+            print("error preparing statment: \(err)")
+            return
+        }
+        if sqlite3_bind_text(stmt, 1, name, -1, nil) != SQLITE_OK {
+            let err = String(cString: sqlite3_errmsg(db))
+            print("error binding name: \(err)")
+            return
+        }
+        if sqlite3_bind_int(stmt, 2, Int32(score)) != SQLITE_OK {
+            let err = String(cString: sqlite3_errmsg(db))
+            print("error binding score: \(err)")
+            return
+        }
+        
+        if sqlite3_step(stmt) != SQLITE_DONE {
+            let err = String(cString: sqlite3_errmsg(db))
+            print("error executing insert: \(err)")
+            return        }
+    }
 
     /*
     // MARK: - Navigation

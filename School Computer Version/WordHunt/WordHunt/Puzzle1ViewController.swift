@@ -199,7 +199,7 @@ class Puzzle1ViewController: UIViewController {
         createWordBank(_wordNum: 9)
         setWordsToLabels()
         randomlyInsertWord()
-        fillEmptyButtons()
+//        fillEmptyButtons()
     }
     
     // Randomly inserting word into buttons

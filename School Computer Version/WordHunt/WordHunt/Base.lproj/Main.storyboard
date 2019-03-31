@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AFs-4R-r9A">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YNz-Mk-UVa">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1595,7 +1595,7 @@
                                 <rect key="frame" x="125" y="458" width="129" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQG-So-Nfs">
@@ -1606,6 +1606,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="submitScore:" destination="YNz-Mk-UVa" eventType="touchUpInside" id="Sj0-8j-X58"/>
                                     <segue destination="jcP-pp-mhH" kind="show" id="uAT-c1-Q71"/>
                                 </connections>
                             </button>
@@ -1625,15 +1626,16 @@
                         <viewLayoutGuide key="safeArea" id="5Pv-8b-vjr"/>
                     </view>
                     <connections>
-                        <outlet property="lv1Lbl" destination="q8c-PY-ZKF" id="tOb-Mu-Fh7"/>
-                        <outlet property="lv2Lbl" destination="yfE-O9-fBL" id="og8-VW-eqy"/>
-                        <outlet property="lv3Lbl" destination="soQ-7Y-Lry" id="PD9-gy-Suu"/>
-                        <outlet property="totalTimeLbl" destination="ks6-Dx-Hef" id="NQU-eW-2zg"/>
+                        <outlet property="lv1Lbl" destination="q8c-PY-ZKF" id="fep-7c-aaH"/>
+                        <outlet property="lv2Lbl" destination="yfE-O9-fBL" id="VUM-j8-FzG"/>
+                        <outlet property="lv3Lbl" destination="soQ-7Y-Lry" id="bpD-K6-J2S"/>
+                        <outlet property="nameTxt" destination="Vcs-AK-zot" id="ijE-eu-irI"/>
+                        <outlet property="totalTimeLbl" destination="ks6-Dx-Hef" id="ewO-Rb-Jhp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7T3-Ia-7LB" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856.8" y="342.27886056971516"/>
+            <point key="canvasLocation" x="1856.8" y="342.11822660098522"/>
         </scene>
         <!--Puzzle2 View Controller-->
         <scene sceneID="EFE-jN-8tE">
@@ -4528,7 +4530,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="g1G-v7-2ks"/>
-        <segue reference="Alx-Xc-LrW"/>
+        <segue reference="uAT-c1-Q71"/>
+        <segue reference="qJh-sw-fY5"/>
     </inferredMetricsTieBreakers>
 </document>

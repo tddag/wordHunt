@@ -195,7 +195,7 @@ class Puzzle3ViewController: UIViewController {
         createWordBank(_wordNum: 15)
         setWordsToLabels()
         randomlyInsertWord()
-        fillEmptyButtons()
+//        fillEmptyButtons()
 
 
         if let lv1 = level1Outcome {
@@ -599,7 +599,6 @@ class Puzzle3ViewController: UIViewController {
                 dc.level2Outcome = lv2
             }
             dc.level3Outcome = String(duration)
-            
         }
     }
     

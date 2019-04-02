@@ -59,6 +59,46 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let err = String(cString: sqlite3_errmsg(db))
                 print("error creating db: \(err)")
             }
+            let countCheck = "SELECT COUNT (*) FROM Players"
+            var stmt: OpaquePointer?
+            var count = 0
+            if sqlite3_prepare(self.db, countCheck, -1, &stmt, nil) == SQLITE_OK{
+                while(sqlite3_step(stmt) == SQLITE_ROW){
+                    count = Int(sqlite3_column_int(stmt, 0))
+                }
+                
+            }
+
+            if count < 4 {
+                let initialScores = [["Hao", 200],["Tam",300],["Quan",400],["Chris",500]]
+                for score in initialScores{
+                    let name:String = score[0] as! String
+                    let scr:Int = score[1] as! Int
+                    let insert = "INSERT INTO Players(name, score) VALUES(?, ?)"
+                    var stmt: OpaquePointer?
+                    
+                    if sqlite3_prepare(db, insert, -1, &stmt, nil) != SQLITE_OK {
+                        let err = String(cString: sqlite3_errmsg(db))
+                        print("error preparing statment: \(err)")
+                        return
+                    }
+                    if sqlite3_bind_text(stmt, 1, name, -1, nil) != SQLITE_OK {
+                        let err = String(cString: sqlite3_errmsg(db))
+                        print("error binding name: \(err)")
+                        return
+                    }
+                    if sqlite3_bind_int(stmt, 2, Int32(scr)) != SQLITE_OK {
+                        let err = String(cString: sqlite3_errmsg(db))
+                        print("error binding score: \(err)")
+                        return
+                    }
+                    
+                    if sqlite3_step(stmt) != SQLITE_DONE {
+                        let err = String(cString: sqlite3_errmsg(db))
+                        print("error executing insert: \(err)")
+                        return        }
+                }
+            }
         }
         readPlayerValues()
 
@@ -71,12 +111,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Read player values from database
     func readPlayerValues() {
         players.removeAll()
-        let p1 = Player(id: 100, name: "Hao", score: 200)
-        let p2 = Player(id: 101, name: "Tam", score: 300)
-        let p3 = Player(id: 102, name: "Quan", score: 400)
-        let p4 = Player(id: 103, name: "Chris", score: 500)
-        players.append(contentsOf: [p1, p2, p3, p4])
-        let q = "SELECT * FROM Players"
+        let q = "SELECT * FROM Players ORDER BY score"
         var stmt: OpaquePointer?
         if sqlite3_prepare(db, q, -1, &stmt, nil) != SQLITE_OK {
             let err = String(cString: sqlite3_errmsg(db))

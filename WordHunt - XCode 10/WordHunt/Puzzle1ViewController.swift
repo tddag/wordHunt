@@ -153,6 +153,9 @@ class Puzzle1ViewController: UIViewController {
     
     var word_count: Int = 0
     
+    // Congratulation message
+    @IBOutlet weak var congratulationMessage: UILabel!
+    
     // Next Level Button
     @IBOutlet weak var nextLevelBtn: UIButton!
     
@@ -160,28 +163,7 @@ class Puzzle1ViewController: UIViewController {
     let alphabet: Array = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     // Dictionary of words
-    let master_word_bank: Array = ["THOMPSON", "VILLAGE", "INSIDE", "GOOD", "AIR", "BREAD",
-                                   "DOMAIN", "CITY", "LAPTOP", "HAIR", "MARGIN", "CIRCUS",
-                                   "GENERAL", "PERSON", "TRAP", "GRATING", "BREADTH", "TREE",
-                                   "PRONE", "ALPHA", "OATMEAL", "RIFLE", "POX", "TITANIC",
-                                   "BAY", "MARSH", "SALMON", "GAVEL", "MOCK", "YARN",
-                                   "FLEET", "SALE", "TART", "HELP", "CRAB", "VALUE"]
-    
-    // Words randomly chosen for this level will go here
-    var word_bank: [String] = []
-    
-    // Fills word_bank with words
-    func createWordBank(_wordNum:Int) {
-        while word_bank.count < _wordNum {
-            let word = master_word_bank.randomElement()
-            if !word_bank.contains(word!) {
-                word_bank.append(word!)
-            }
-        }
-    }
-    
-    
-    
+    let word_bank: Array = ["THOMPSON", "VILLAGE", "INSIDE", "GOOD", "AIR", "BREAD", "DOMAIN", "CITY", "LAPTOP"]
     
     // array of word_directions
     let word_directions: Array = ["vertical","horizontal", "rightleft_diagonal", "leftright_diagonal" ]
@@ -189,14 +171,11 @@ class Puzzle1ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Toggle timer to true
-//        isTimerOn.toggle()
-        isTimerOn = true
+        isTimerOn.toggle()
         toggleTimer(on: isTimerOn)
-        // Create word bank
-        createWordBank(_wordNum: 9)
         setWordsToLabels()
         randomlyInsertWord()
-        fillEmptyButtons()
+//        fillEmptyButtons()
     }
     
     // Randomly inserting word into buttons
@@ -206,9 +185,9 @@ class Puzzle1ViewController: UIViewController {
         for word in word_bank {
             for _ in 0..<1000000000000000 {
                 // generate random row index
-                var row:Int = Int(arc4random_uniform(10))
+                var row:Int = Int.random(in: 0...9)
                 // generate random col index
-                var col:Int = Int(arc4random_uniform(10))
+                var col:Int = Int.random(in: 0...9)
                 // generate random word direction
                 let word_direction = word_directions.randomElement()
                 // condition_flag: check
@@ -326,23 +305,8 @@ class Puzzle1ViewController: UIViewController {
     
     // Display letters when each letter is pressed
     @IBAction func letterButtonPressed(_ sender: UIButton) {
-        if sender.isSelected == false{
-            sender.isSelected = true
-            word_Output.text = word_Output.text! + String(sender.currentTitle!)
-        }
-        else if sender.isSelected == true{
-            sender.isSelected = false
-            var count = word_Output.text!.count
-            var removed = false
-            while (count > 0){
-                if (removed == false) {
-                    removed = true
-                }
-                else{
-                }
-                count = count - 1
-            }
-        }
+        sender.isSelected = true
+        word_Output.text = word_Output.text! + String(sender.currentTitle!)
     }
     
     // Fill empty buttons
@@ -359,7 +323,7 @@ class Puzzle1ViewController: UIViewController {
     
     // Check Word
     @IBAction func checkWord(_ sender: Any) {
-        if word_bank.contains(word_Output.text!) && checkLetters() {
+        if word_bank.contains(word_Output.text!) {
             message.text = "CORRECT!!!"
             message.backgroundColor = UIColor.green
             let outputLabels: [UILabel] = loadOutputLabelArr()
@@ -376,6 +340,7 @@ class Puzzle1ViewController: UIViewController {
             message.backgroundColor = UIColor.yellow
         }
         if word_count == 9 {
+            congratulationMessage.isHidden = false
             nextLevelBtn.isHidden = false
         }
         messageApper(message)
@@ -507,51 +472,6 @@ class Puzzle1ViewController: UIViewController {
         }
     }
     
-    // Checks if letters are in order/adjacent to each other
-    func checkLetters () -> Bool {
-        // Checks for all selected buttons and adds them into an array.
-        var buttonsArr: [[UIButton]] = loadButtonArray()
-        var selectedButtons: [String] = []
-        for a in 0...9 {
-            for b in 0...9 {
-                if buttonsArr[a][b].isSelected ==  true {
-                    let val = "\(a)\(b)"
-                    selectedButtons.append(val)
-                }
-            }
-        }
-        // Uses selected buttons array and checks that each button is adjacent to the next one (horizontally, vertically, rightleft-diagonally, leftright-diagonally), then puts the direction (horizontal, vertical, rightleft-diagonally, leftright-diagonally) into an array
-        var direction: [String] = []
-        for i in 1..<selectedButtons.count {
-            if selectedButtons[i-1].prefix(1) == selectedButtons[i].prefix(1) &&
-                Int(selectedButtons[i-1].suffix(1))! == Int(selectedButtons[i].suffix(1))! - 1 {
-                direction.append("V")
-            }
-            else if selectedButtons[i-1].suffix(1) == selectedButtons[i].suffix(1) &&
-                Int(selectedButtons[i-1].prefix(1))! == Int(selectedButtons[i].prefix(1))! - 1 {
-                direction.append("H")
-            }
-            else if Int(selectedButtons[i-1].prefix(1)) == Int(selectedButtons[i].prefix(1))! - 1 &&
-                Int(selectedButtons[i-1].suffix(1)) == Int(selectedButtons[i].suffix(1))! + 1 {
-                direction.append("RLD")
-            }
-            else if Int(selectedButtons[i-1].prefix(1)) == Int(selectedButtons[i].prefix(1))! - 1 &&
-                Int(selectedButtons[i-1].suffix(1)) == Int(selectedButtons[i].suffix(1))! - 1 {
-                direction.append("LRD")
-            }
-            else {
-                return false
-            }
-        }
-        // Checks the direction array to make sure all shifts are only horizontal, or only vertical, or only rightleft-diagonally, or only leftright-diagonally.
-        for i in direction{
-            if direction[0] != i {
-                return false
-            }
-        }
-        return true
-    }
-    
     // Invalidate timer when press NEXT LEVEL
     @IBAction func nextLevel(_ sender: Any) {
         timer.invalidate()
@@ -566,12 +486,6 @@ class Puzzle1ViewController: UIViewController {
             dc.level1Outcome = String(duration)
         }
     }
-}
+    
 
-extension Array {
-    func randomElement() -> Element? {
-        if isEmpty { return nil }
-        let index = Int(arc4random_uniform(UInt32(self.count)))
-        return self[index]
-    }
 }
